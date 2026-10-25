@@ -6,27 +6,31 @@ using namespace std;
 class MatrizCOO
 {
 public:
-    MatrizCOO(int linhas, int colunas);
+    MatrizCOO();
 
     ~MatrizCOO();
 
     int Get(int i, int j) const;
 
     void Set(int i, int j, int v);
+    
+    void AdicionarAtributo(int id_atributo);
 
-    void Imprime() const;
+    void AdicionarItem(int id_item);
 
-    void LeMatriz();
+    //LA: Discover all atributes an item modifies (Line values)
+    int atributos_item(int id_item, int *atributes, int *modifiers);
 
-    static void Soma(const MatrizCOO &A, const MatrizCOO &B, MatrizCOO &C);
+    //LA: Discover all itens that modify an attibute (Column values)
+    int itens_atributo(int id_atributo, int *items, int *modifiers); 
 
-    static double *Produto(const MatrizCOO &A, const int *u, int n);
+    //sum of one item's modifiers and measures how many 0 atributes it has
+    int Soma(int id_item, int * nao_nulos = nullptr); 
 
-    //LA: Discover all atributes an item modifies  
-    int atributos_item(int id_item, int *atributes, int *modifiers); //Line values
+    //method to help calculates Equilíbrio
+    double Desvio(int id_item);
 
-    //LA: Discover all itens that modify an attibute
-    int itens_atributo(int id_atributo, int *items, int *modifiers); //Column values
+    int Produto(int id_item1, int id_item2);
 
     int l, c;       // dimensoes da matriz representada
     int tamanho;    // k = triples with non-zero values

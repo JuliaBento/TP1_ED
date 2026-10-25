@@ -1,12 +1,13 @@
 #include "matrizcoo.hpp"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-MatrizCOO::MatrizCOO(int linhas_, int colunas_)
+MatrizCOO::MatrizCOO()
 {
-    l = linhas_;
-    c = colunas_;
+    l = 0;
+    c = 0;
     tamanho = 0;
     tamanhoMAX = 4; //Little initial size by default 
     linhas = new int[tamanhoMAX];
@@ -57,42 +58,19 @@ void MatrizCOO::Set(int i, int j, int v)
 
 }
 
-void MatrizCOO::Imprime() const
+void MatrizCOO::AdicionarAtributo(int id_atributo)
 {
-    int p = 0; 
-    for (int i = 0; i < l; i++) {
-        for (int j = 0; j < c; j++) {
-            if (p < tamanho && linhas[p] == i
-                && colunas[p] == j) {
-                cout << valores[p] << " ";
-                p++;
-            } else {
-                cout << "0 ";
-            }
-        }
-        cout << "\n";
+    if ((id_atributo + 1) > c){
+        c = (id_atributo + 1);
     }
 }
 
-void MatrizCOO::LeMatriz()
+void MatrizCOO::AdicionarItem(int id_item)
 {
-    int x;
-    for (int i = 0; i < l; i++)
-        for (int j = 0; j < c; j++)
-        {
-            cin >> x;
-            if (x != 0) InsereElemento(i, j, x);
-        }
+    if ((id_item + 1) > l){
+        l = (id_item + 1);
+    }
 }
-
-void MatrizCOO::Soma(const MatrizCOO &A, const MatrizCOO &B, MatrizCOO &C)
-{
-}
-
-double *MatrizCOO::Produto(const MatrizCOO &A, const int *u, int n)
-{
-}
-
 
 int MatrizCOO::atributos_item(int id_item, int *atributes, int *modifiers)
 {
@@ -121,6 +99,71 @@ int MatrizCOO::itens_atributo(int id_atributo, int *items, int *modifiers)
     }
     return count;
 } 
+
+int MatrizCOO::Soma(int id_item, int * nao_nulos)
+{
+    int total = 0; 
+    for (int i = 0; i < tamanho; i++) {
+        if(linhas[i] == id_item)
+        {
+            total += valores[i];
+            
+            if (nao_nulos != nullptr)
+            {
+                (*nao_nulos)++;
+            }
+        }
+    }
+    return total;
+}
+
+double MatrizCOO::Desvio(int id_item)
+{
+    if(c == 0){
+        return 0;
+    }
+
+    double desvio = 0.00; 
+    int nao_nulos = 0;
+    int poder = Soma(id_item, &nao_nulos); //to calculate PODER()
+    double media = static_cast<double>(poder) / c; //correction of type to preserve decimal places
+    
+    for (int i = 0; i < tamanho; i++) {
+        if(linhas[i] == id_item)
+        {
+            desvio += (valores[i] - media) * (valores[i] - media);
+        }
+    }
+    desvio += ((c - nao_nulos) * ((0 - media) * (0 - media))); //to deal with 0 atributes 
+    desvio = sqrt(desvio/ static_cast<double>(c));
+
+    return desvio;   
+}
+
+int MatrizCOO::Produto(int id_item1, int id_item2)
+{
+    int result = 0;
+
+    int id_atributos1[c]; 
+    int valores_atributos1[c];
+
+    int id_atributos2[c]; 
+    int valores_atributos2[c];
+
+    int total_atrib1 = atributos_item(id_item1, id_atributos1, valores_atributos1);
+    int total_atrib2 = atributos_item(id_item2, id_atributos2, valores_atributos2); 
+  
+
+    for(int i = 0; i < total_atrib1; i++){
+        for (int j = 0; j < total_atrib2; j++){
+            if(id_atributos1[i] == id_atributos2[j]){
+                result += valores_atributos1[i] * valores_atributos2[j];
+            }
+        }
+    }
+    return result;
+}
+
 
 void MatrizCOO::InsereElemento(int i, int j, int v)
 {
