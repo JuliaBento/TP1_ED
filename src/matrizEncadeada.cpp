@@ -102,6 +102,11 @@ void MatrizEncadeada::Set(int i, int j, int v)
     tamanho++;
 }
 
+void MatrizEncadeada::limpar()
+{
+    
+}
+
 void MatrizEncadeada::AdicionarAtributo(int id_atributo)
 {
     int anterior = c;

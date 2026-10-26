@@ -58,6 +58,13 @@ void MatrizCOO::Set(int i, int j, int v)
 
 }
 
+void MatrizCOO::limpar()
+{
+    tamanho = 0;
+    c = 0;
+    l = 0;
+}
+
 void MatrizCOO::AdicionarAtributo(int id_atributo)
 {
     if ((id_atributo + 1) > c){

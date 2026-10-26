@@ -19,6 +19,8 @@ public:
     int Get(int i, int j) const;
 
     void Set(int i, int j, int v);
+
+    void limpar();
     
     void AdicionarAtributo(int id_atributo);
 

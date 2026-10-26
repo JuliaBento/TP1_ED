@@ -1,98 +1,42 @@
 #include <iostream>
 //#include "stack.hpp"
-#include "matrizcoo.hpp"
+//#include "matrizcoo.hpp"
+#include "matrizEncadeada.hpp"
 
 using namespace std;
 
-int main() {
-    MatrizCOO matriz(5, 5);
+int main()
+{
+    MatrizEncadeada matriz(3, 4);
 
-    //Como vou implementar a LI em catálogo vai ser mais ou menos assim:
+    // Item 0: [2, 4, 0, 0]
+    matriz.Set(0, 0, 2);
+    matriz.Set(0, 1, 4);
 
-    int id_atributos[matriz.c]; //lembrar que para LA: matriz.l
-    int valores_atributos[matriz.c];
+    // Item 1: [1, 0, 3, 0]
+    matriz.Set(1, 0, 1);
+    matriz.Set(1, 2, 3);
 
-    matriz.Set(0,0,1);
-    matriz.Set(0,1,1);
-    matriz.Set(0,2,1);
-    matriz.Set(0,3,1);
-    matriz.Set(0,4,1);
+    // Item 2: [0, 0, 0, 0]
 
-    matriz.Imprime();
+    cout << "Soma do item 0: " << matriz.Soma(0) << endl;
+    cout << "Soma do item 1: " << matriz.Soma(1) << endl;
+    cout << "Soma do item 2: " << matriz.Soma(2) << endl;
 
-    int total_atributos;
+    cout << "\nDesvio do item 0: " << matriz.Desvio(0) << endl;
+    cout << "Desvio do item 1: " << matriz.Desvio(1) << endl;
+    cout << "Desvio do item 2: " << matriz.Desvio(2) << endl;
 
-    total_atributos = matriz.itens_atributo(0, id_atributos, valores_atributos);
+    cout << "\nProduto entre item 0 e item 1: "
+         << matriz.Produto(0, 1) << endl;
 
-    cout << total_atributos << endl;
+    cout << "Produto entre item 0 e item 0: "
+         << matriz.Produto(0, 0) << endl;
 
-    for(int i = 0; i < total_atributos; i++){
-        cout << "id_a: " << id_atributos[i] << " valor: "<< valores_atributos[i] << endl;
-    }
-    
+    cout << "Produto entre item 0 e item 2: "
+         << matriz.Produto(0, 2) << endl;
 
-//     Stack s1;
-
-//     int comando, data, key;
-
-//     Node* new_node = new Node();
-    
-//     cout << "Selecione o comando:" << endl;
-//     cin >> comando;
-
-//     switch (comando) {
-//         case 0:
-//             cout << "Sair" << endl;
-//             break;  
-        
-//         case 1:
-//             cout << "Incluir item:" << endl;
-//             cin >> key;
-//             cin >> data;
-//             new_node->key = key;
-//             new_node->data = data;
-//             if (!s1.push(new_node)) {
-//                 delete new_node;
-//             }
-//             break;
-
-//         case 2:
-//             cout << "Remover item:" << endl;
-//             new_node = s1.pop();
-//             delete new_node;
-//             break;
-
-//         case 3:
-//             if(s1.isEmpty()) {
-//                 cout << "Pilha vazia" << endl;
-//             } else {
-//                 cout << "Pilha não vazia" << endl;
-//             }
-//             break;
-        
-//         case 4:
-//             if(s1.isEmpty()) {
-//                 cout << "Pilha vazia" << endl;
-//             } else {
-//                 new_node = s1.peek();
-//                 cout << "Item no topo: " << new_node->data << endl;
-//             }
-//             break;
-        
-//         case 5: {
-//             int count = s1.count();
-//             cout << count << endl;
-//             break;
-//         }
-//         case 6:
-//             cout << "Itens na pilha:" << endl;
-//             s1.display();   
-//             break;
-
-//         case 7:
-//             cout << "Sair" << endl;
-//             break;
-//     }
+    return 0;
 }
 
 

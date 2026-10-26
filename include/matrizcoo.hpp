@@ -14,6 +14,8 @@ public:
 
     void Set(int i, int j, int v);
     
+    void limpar();
+    
     void AdicionarAtributo(int id_atributo);
 
     void AdicionarItem(int id_item);
