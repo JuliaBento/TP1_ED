@@ -19,6 +19,9 @@ class Catalogo
 
         void LA_consulta(int id_atributo);
 
+        int Poder();
+        int Equilibrioo();
+
 
     private:
         MatrizEncadeada matriz_encadeada;
@@ -28,8 +31,6 @@ class Catalogo
             ENCADEADA
         };
         Modo_Matriz modo;
-
-
 };
 
 #endif

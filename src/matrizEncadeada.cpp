@@ -104,7 +104,21 @@ void MatrizEncadeada::Set(int i, int j, int v)
 
 void MatrizEncadeada::limpar()
 {
-    
+    for (int i = 0; i < l; i++)
+    { // pelas linhas
+        Celula *p = cabLin[i]->proxLin;
+        while (p != nullptr)
+        {
+            Celula *q = p->proxLin;
+            delete p;
+            p = q;
+        }
+        cabLin[i]->proxLin = nullptr;
+    }
+    for (int j = 0; j < c; j++)
+        cabCol[j]->proxCol = nullptr;
+
+    tamanho = 0;
 }
 
 void MatrizEncadeada::AdicionarAtributo(int id_atributo)
