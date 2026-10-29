@@ -15,11 +15,17 @@ class Catalogo
 
         void M_modificador(int id_item, int id_atributo, int valor);
 
-        void LI_consulta(int id_item);
+        int LI_consulta(int id_item, int* atributos, int* modificadores);
 
-        void LA_consulta(int id_atributo);
+        int LA_consulta(int id_atributo, int* itens, int* modificadores);
+
+        //function used to suport build aventureiro sets the vector range
+        int quantidade_modificadores();
+
+        int modificador(int id_item, int id_atributo);
 
         int Poder();
+        
         int Equilibrioo();
 
 

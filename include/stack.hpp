@@ -8,12 +8,11 @@ using namespace std;
 class Node {
     public:
         int key;
-        int data;
         Node* next;
     
         Node();
 
-        Node(int k, int d);
+        Node(int k);
 };
 
 class Stack {

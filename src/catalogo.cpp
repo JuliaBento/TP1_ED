@@ -81,15 +81,37 @@ void Catalogo::M_modificador(int id_item, int id_atributo, int valor)
     }
 }
 
-void Catalogo::LI_consulta(int id_item)
+int Catalogo::LI_consulta(int id_item, int* atributos, int* modificadores)
 {
-    
+    if(this->modo == Modo_Matriz::TRIPLETAS)
+    {
+        return matriz_coo.atributos_item(id_item, atributos, modificadores);
+    }
+    return matriz_encadeada.atributos_item(id_item, atributos, modificadores);
 }
 
-void Catalogo::LA_consulta(int id_atributo)
+int Catalogo::LA_consulta(int id_atributo, int* itens, int* modificadores)
 {
-
+    if(this->modo == Modo_Matriz::TRIPLETAS)
+    {
+        return matriz_coo.itens_atributo(id_atributo, itens, modificadores);
+    }
+    return matriz_encadeada.itens_atributo(id_atributo, itens, modificadores);
 }
 
+int Catalogo::quantidade_modificadores()
+{
+    if (this->modo == Modo_Matriz::TRIPLETAS)
+    {
+        return matriz_coo.tamanho;
+    }
+    return matriz_encadeada.tamanho;
+}
 
+int Catalogo::modificador(int id_item, int id_atributo)
+{
+    if(modo == Modo_Matriz::TRIPLETAS)
+        return matriz_coo.Get(id_item, id_atributo);
 
+    return matriz_encadeada.Get(id_item, id_atributo);
+}

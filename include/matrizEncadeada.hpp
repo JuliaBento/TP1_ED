@@ -29,7 +29,7 @@ public:
     //LA: Discover all atributes an item modifies (Line values)
     int atributos_item(int id_item, int *atributes, int *modifiers);
 
-    //LA: Discover all itens that modify an attibute (Column values)
+    //LI: Discover all itens that modify an attibute (Column values)
     int itens_atributo(int id_atributo, int *items, int *modifiers); 
 
     //sum of one item's modifiers and measures how many 0 atributes it has

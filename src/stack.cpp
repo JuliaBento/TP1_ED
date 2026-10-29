@@ -5,14 +5,12 @@ using namespace std;
 Node::Node()
 {
     key = 0;
-    data = 0;
     next = NULL;
 }
 
-Node::Node(int k, int d)
+Node::Node(int k)
 {
     key = k;
-    data = d;
     next = NULL;
 }
 
@@ -51,17 +49,10 @@ bool Stack::checkIfNodeExist(Node *n)
 
 bool Stack::push(Node *n)
 {
-    bool exist = checkIfNodeExist(n);
-
     if (top == NULL)
     {
         top = n;
         return true;
-    }
-    else if (exist)
-    {
-        cout << "Chave conflitante" << endl;
-        return false;
     }
     else
     {
@@ -120,7 +111,7 @@ void Stack::display()
     Node *temp = top;
     while (temp != NULL)
     {
-        cout << "(" << temp->key << "," << temp->data << ")" << endl;
+        cout << "(" << temp->key << ")" << endl;
         temp = temp->next;
     }
 }
