@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MATRIZENCADEADA_HPP
 #define MATRIZENCADEDADA_HPP
 
@@ -9,6 +10,7 @@ struct Celula
     Celula *proxLin; // proxima celula na mesma linha (coluna maior)
     Celula *proxCol; // proxima celula na mesma coluna (linha maior)
 };
+
 class MatrizEncadeada
 {
 public:

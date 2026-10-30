@@ -11,6 +11,6 @@ class Atributo {
 
     public:
         Atributo(int id, string nome);
-}
+};
 
 #endif

@@ -160,14 +160,26 @@ int MatrizCOO::Produto(int id_item1, int id_item2)
     int total_atrib1 = atributos_item(id_item1, id_atributos1, valores_atributos1);
     int total_atrib2 = atributos_item(id_item2, id_atributos2, valores_atributos2); 
   
+    int i = 0;
+    int j = 0;
 
-    for(int i = 0; i < total_atrib1; i++){
-        for (int j = 0; j < total_atrib2; j++){
-            if(id_atributos1[i] == id_atributos2[j]){
-                result += valores_atributos1[i] * valores_atributos2[j];
-            }
+    while(i < total_atrib1 && j < total_atrib2)
+    {
+        if(id_atributos1[i] == id_atributos2[j]){
+            result += valores_atributos1[i] * valores_atributos2[j];
+            i++;
+            j++;
+        }
+        else if(id_atributos1[i] < id_atributos2[j])
+        {
+            i++;
+        }
+        else
+        {
+            j++;
         }
     }
+
     return result;
 }
 

@@ -59,7 +59,6 @@ bool Stack::push(Node *n)
         Node *temp = top;
         top = n;
         n->next = temp;
-        cout << "Item adicionado" << endl;
         return true;
     }
 }
@@ -69,14 +68,12 @@ Node *Stack::pop()
     Node *temp = NULL;
     if (isEmpty())
     {
-        cout << "Pilha vazia" << endl;
         return temp;
     }
     else
     {
         temp = top;
         top = top->next;
-        cout << "Item removido" << endl;
     }
     return temp;
 }
@@ -85,7 +82,6 @@ Node *Stack::peek()
 {
     if (isEmpty())
     {
-        cout << "Pilha vazia" << endl;
         return NULL;
     }
     else
@@ -111,7 +107,6 @@ void Stack::display()
     Node *temp = top;
     while (temp != NULL)
     {
-        cout << "(" << temp->key << ")" << endl;
         temp = temp->next;
     }
 }

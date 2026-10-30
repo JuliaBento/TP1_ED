@@ -1,42 +1,86 @@
 #include <iostream>
-//#include "stack.hpp"
-//#include "matrizcoo.hpp"
-#include "matrizEncadeada.hpp"
+#include <iomanip>
+#include "catalogo.hpp"
+#include "aventureiro.hpp"
 
 using namespace std;
 
 int main()
 {
-    MatrizEncadeada matriz(3, 4);
+    Catalogo catalogo;
 
-    // Item 0: [2, 4, 0, 0]
-    matriz.Set(0, 0, 2);
-    matriz.Set(0, 1, 4);
+    catalogo.M_modificador(0, 2, 5);
+    catalogo.M_modificador(0, 0, 3);
 
-    // Item 1: [1, 0, 3, 0]
-    matriz.Set(1, 0, 1);
-    matriz.Set(1, 2, 3);
+    catalogo.M_modificador(1, 1, 4);
+    catalogo.M_modificador(1, 2, -2);
 
-    // Item 2: [0, 0, 0, 0]
+    catalogo.M_modificador(2, 3, 7);
 
-    cout << "Soma do item 0: " << matriz.Soma(0) << endl;
-    cout << "Soma do item 1: " << matriz.Soma(1) << endl;
-    cout << "Soma do item 2: " << matriz.Soma(2) << endl;
+    catalogo.E_modo('L');
 
-    cout << "\nDesvio do item 0: " << matriz.Desvio(0) << endl;
-    cout << "Desvio do item 1: " << matriz.Desvio(1) << endl;
-    cout << "Desvio do item 2: " << matriz.Desvio(2) << endl;
+    cout << "Total de modificadores: "
+         << catalogo.quantidade_modificadores() << endl;
 
-    cout << "\nProduto entre item 0 e item 1: "
-         << matriz.Produto(0, 1) << endl;
+    Aventureiro aventureiro(0, "Guerreiro");
 
-    cout << "Produto entre item 0 e item 0: "
-         << matriz.Produto(0, 0) << endl;
+    cout << fixed << setprecision(6);
 
-    cout << "Produto entre item 0 e item 2: "
-         << matriz.Produto(0, 2) << endl;
+    cout << "\n===== TESTE 1: METRICAS ENCADEADA =====\n";
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << "\nItem " << i << endl;
+        cout << "Poder: " << catalogo.Poder(i) << endl;
+        cout << "Equilibrio: " << catalogo.Equilibrio(i) << endl;
+        cout << "Sinergia: " << aventureiro.sinergia(i, catalogo) << endl;
+    }
+
+    cout << "\n===== TESTE 2: EQUIPAR ITEM 0 =====\n";
+
+    aventureiro.equipar(0, catalogo);
+    aventureiro.LH_consulta_build();
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << "Sinergia item " << i << ": "
+             << aventureiro.sinergia(i, catalogo) << endl;
+    }
+
+    cout << "\n===== TESTE 3: EQUIPAR ITEM 1 =====\n";
+
+    aventureiro.equipar(1, catalogo);
+    aventureiro.LH_consulta_build();
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << "Sinergia item " << i << ": "
+             << aventureiro.sinergia(i, catalogo) << endl;
+    }
+
+    cout << "\n===== TESTE 4: DESEQUIPAR ITEM 1 =====\n";
+
+    aventureiro.desequipar(catalogo);
+    aventureiro.LH_consulta_build();
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << "Sinergia item " << i << ": "
+             << aventureiro.sinergia(i, catalogo) << endl;
+    }
+
+    cout << "\n===== TESTE 5: DESEQUIPAR ITEM 0 =====\n";
+
+    aventureiro.desequipar(catalogo);
+    aventureiro.LH_consulta_build();
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << "Sinergia item " << i << ": "
+             << aventureiro.sinergia(i, catalogo) << endl;
+    }
+
+    cout << "\n===== FIM DOS TESTES ENCADEADA =====\n";
 
     return 0;
 }
-
-

@@ -25,6 +25,7 @@ class Aventureiro {
 
     public:
         Aventureiro(int id_, string nome_);
+        ~Aventureiro();
         void equipar(int id_item, Catalogo& catalogo);
         void desequipar(Catalogo& catalogo);
         void LH_consulta_build();

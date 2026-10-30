@@ -18,7 +18,7 @@ void Catalogo::E_modo(char modo)
     
     limpar_matriz(); //Cleaning destine matrix
     
-    if(modo_antigo == Modo_Matriz::ENCADEADA){
+    if(modo_antigo == Modo_Matriz::TRIPLETAS){
         for(int i = 0; i < matriz_coo.tamanho; i++) {
             {
                 int linha  = matriz_coo.linhas[i];
@@ -81,22 +81,22 @@ void Catalogo::M_modificador(int id_item, int id_atributo, int valor)
     }
 }
 
-int Catalogo::LI_consulta(int id_item, int* atributos, int* modificadores)
-{
-    if(this->modo == Modo_Matriz::TRIPLETAS)
-    {
-        return matriz_coo.atributos_item(id_item, atributos, modificadores);
-    }
-    return matriz_encadeada.atributos_item(id_item, atributos, modificadores);
-}
-
-int Catalogo::LA_consulta(int id_atributo, int* itens, int* modificadores)
+int Catalogo::LI_consulta(int id_atributo, int* itens, int* modificadores)
 {
     if(this->modo == Modo_Matriz::TRIPLETAS)
     {
         return matriz_coo.itens_atributo(id_atributo, itens, modificadores);
     }
     return matriz_encadeada.itens_atributo(id_atributo, itens, modificadores);
+}
+
+int Catalogo::LA_consulta(int id_item, int* atributos, int* modificadores)
+{
+    if(this->modo == Modo_Matriz::TRIPLETAS)
+    {
+        return matriz_coo.atributos_item(id_item, atributos, modificadores);
+    }
+    return matriz_encadeada.atributos_item(id_item, atributos, modificadores);
 }
 
 int Catalogo::quantidade_modificadores()
@@ -114,4 +114,24 @@ int Catalogo::modificador(int id_item, int id_atributo)
         return matriz_coo.Get(id_item, id_atributo);
 
     return matriz_encadeada.Get(id_item, id_atributo);
+}
+
+int Catalogo::Poder(int id_item)
+{
+    if(modo == Modo_Matriz::TRIPLETAS)
+        return matriz_coo.Soma(id_item);
+
+    return matriz_encadeada.Soma(id_item);
+}
+
+double Catalogo::Equilibrio(int id_item)
+{
+    double desvio;
+
+    if(modo == Modo_Matriz::TRIPLETAS)
+        desvio = matriz_coo.Desvio(id_item);
+    else
+        desvio = matriz_encadeada.Desvio(id_item);
+
+    return 1.0 / (1.0 + desvio);
 }
