@@ -11,6 +11,9 @@ class Atributo {
 
     public:
         Atributo(int id, string nome);
+
+        int get_ID();
+        string get_nome();
 };
 
 #endif

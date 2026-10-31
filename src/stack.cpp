@@ -19,6 +19,16 @@ Stack::Stack()
     top = NULL;
 }
 
+Stack::~Stack()
+{
+    while (top != nullptr)
+    {
+        Node *temp = top;
+        top = top->next;
+        delete temp;
+    }
+}
+
 bool Stack::isEmpty()
 {
     if (top == NULL)

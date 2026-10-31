@@ -16,18 +16,19 @@ class Aventureiro {
     private:
         int id;
         string nome;
-
         Stack itens;
-  
         Estrutura_build *build;
+        
         int tamanho_build;
         int capacidade_build;
 
     public:
         Aventureiro(int id_, string nome_);
         ~Aventureiro();
+        int get_id();
+        string get_nome();
         void equipar(int id_item, Catalogo& catalogo);
-        void desequipar(Catalogo& catalogo);
+        void D_desequipar(Catalogo& catalogo);
         void LH_consulta_build();
         void aumentar_build();
         double sinergia(int id_item, Catalogo& catalogo);

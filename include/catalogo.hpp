@@ -8,26 +8,17 @@ class Catalogo
 {
     public:
         Catalogo();
-        
         void E_modo(char modo);
-
         void limpar_matriz();
-
         void M_modificador(int id_item, int id_atributo, int valor);
-
         int LI_consulta(int id_atributo, int* itens, int* modificadores);
-
         int LA_consulta(int id_item, int* atributos, int* modificadores);
-
-        //function used to suport build aventureiro sets the vector range
-        int quantidade_modificadores();
-
-        int modificador(int id_item, int id_atributo);
-
+        int quantidade_modificadores(); //function used to suport build aventureiro sets the vector range
+        int get_modificador(int id_item, int id_atributo);
         int Poder(int id_item);
-        
         double Equilibrio(int id_item);
-
+        void cadastrar_item(int id_item);
+        void cadastrar_atributo(int id_atributo);
 
     private:
         MatrizEncadeada matriz_encadeada;

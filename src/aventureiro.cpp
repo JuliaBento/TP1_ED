@@ -17,6 +17,16 @@ Aventureiro::~Aventureiro()
     delete[] build;
 }
 
+int Aventureiro::get_id()
+{
+    return this->id;
+}
+
+string Aventureiro::get_nome()
+{
+    return this->nome;
+}
+
 void Aventureiro::equipar(int id_item, Catalogo &catalogo)
 {
     // Add item in the stack
@@ -75,7 +85,7 @@ void Aventureiro::equipar(int id_item, Catalogo &catalogo)
     delete[] modificadores;
 }
 
-void Aventureiro::desequipar(Catalogo &catalogo)
+void Aventureiro::D_desequipar(Catalogo &catalogo)
 {
     // Take the item off
     if (itens.isEmpty())

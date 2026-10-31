@@ -14,25 +14,35 @@ void Catalogo::E_modo(char modo)
 
     if((modo == 'T' && this->modo == Modo_Matriz::TRIPLETAS) ||
        (modo == 'L' && this->modo == Modo_Matriz::ENCADEADA))
-        throw "Matriz já está nesse modo";
-    
+        return; 
+       
     limpar_matriz(); //Cleaning destine matrix
     
     if(modo_antigo == Modo_Matriz::TRIPLETAS){
+        if(matriz_coo.l > 0)
+            matriz_encadeada.AdicionarItem(matriz_coo.l -1);
+
+        if(matriz_coo.c > 0)
+            matriz_encadeada.AdicionarAtributo(matriz_coo.c -1);
+
         for(int i = 0; i < matriz_coo.tamanho; i++) {
             {
                 int linha  = matriz_coo.linhas[i];
                 int coluna = matriz_coo.colunas[i];
                 int mod    = matriz_coo.valores[i];
-                
-                matriz_encadeada.AdicionarItem(linha);
-                matriz_encadeada.AdicionarAtributo(coluna);
+
                 matriz_encadeada.Set(linha, coluna, mod);  
             }
         }
     } 
     else 
     {
+        if(matriz_encadeada.l > 0)
+            matriz_coo.AdicionarItem(matriz_encadeada.l -1);
+
+        if(matriz_encadeada.c > 0)
+            matriz_coo.AdicionarAtributo(matriz_encadeada.c -1);
+
         for(int i = 0; i < matriz_encadeada.l; i++)
         {
             int *atributes = new int[matriz_encadeada.c];
@@ -42,8 +52,6 @@ void Catalogo::E_modo(char modo)
 
             for(int p = 0; p < quantidade; p++)
             {
-                matriz_coo.AdicionarItem(i);
-                matriz_coo.AdicionarAtributo(atributes[p]);
                 matriz_coo.Set(i, atributes[p], modifiers[p]);
             }
             delete[] atributes;
@@ -108,7 +116,7 @@ int Catalogo::quantidade_modificadores()
     return matriz_encadeada.tamanho;
 }
 
-int Catalogo::modificador(int id_item, int id_atributo)
+int Catalogo::get_modificador(int id_item, int id_atributo)
 {
     if(modo == Modo_Matriz::TRIPLETAS)
         return matriz_coo.Get(id_item, id_atributo);
@@ -134,4 +142,20 @@ double Catalogo::Equilibrio(int id_item)
         desvio = matriz_encadeada.Desvio(id_item);
 
     return 1.0 / (1.0 + desvio);
+}
+
+void Catalogo::cadastrar_item(int id_item)
+{
+    if (modo == Modo_Matriz::TRIPLETAS)
+        matriz_coo.AdicionarItem(id_item);
+    else
+        matriz_encadeada.AdicionarItem(id_item);
+}
+    
+void Catalogo::cadastrar_atributo(int id_atributo)
+{
+    if (modo == Modo_Matriz::TRIPLETAS)
+        matriz_coo.AdicionarAtributo(id_atributo);
+    else
+        matriz_encadeada.AdicionarAtributo(id_atributo);
 }

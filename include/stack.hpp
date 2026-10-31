@@ -11,7 +11,6 @@ class Node {
         Node* next;
     
         Node();
-
         Node(int k);
 };
 
@@ -20,27 +19,14 @@ class Stack {
         Node *top;
 
         Stack();
-
-        //Verifies if the stack is empty
-        bool isEmpty();
-
-        //Check if a especific node already exists
-        bool checkIfNodeExist(Node* n);
-
-        //Add a new node
-        bool push(Node* n);
-
-        //Remove the top (last in) node
-        Node* pop();
-
-        //Returns the top node
-        Node* peek();
-
-        //Counts the numbers of nodes 
-        int count();
-
-        //Prints the stack
-        void display();     
+        ~Stack();
+        bool isEmpty();//Verifies if the stack is empty
+        bool checkIfNodeExist(Node* n);//Check if a especific node already exists
+        bool push(Node* n);//Add a new node
+        Node* pop();//Remove the top (last in) node
+        Node* peek();//Returns the top node
+        int count();//Counts the numbers of nodes 
+        void display(); //Prints the stack    
 };
 
 #endif
